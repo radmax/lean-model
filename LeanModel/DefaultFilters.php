@@ -11,12 +11,19 @@ class DefaultFilters implements IFilters
 	
 	public function registerFilters(Connection $connection)
 	{
+		$connection->registerFilter('orderBy', array($this, 'orderBy'));
 		$connection->registerFilter('limit', array($this, 'limit'));
 		$connection->registerFilter('where', array($this, 'where'));
 		$connection->registerFilter('is', array($this, 'is'));
 		$connection->registerFilter('not', array($this, 'not'));
 	}
 
+
+	public function orderBy(Fluent $statement, $ord)
+	{
+		$statement->orderBy($ord);
+	}
+	
 
 	public function limit(Fluent $statement, $limit)
 	{
